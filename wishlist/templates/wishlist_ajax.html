@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h5>Name: </h5>
+<p>{{Maysha}}</p>
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<table>
+    <tr>
+    <th>Item Name</th>
+    <th>Item Price</th>
+    <th>Description</th>
+    </tr>
+    {% comment %} Add the data below this line {% endcomment %}
+    
+    {% comment %} Tambahkan data di bawah baris ini {% endcomment %}
+    {% for barang in list_barang %}
+        <tr>
+            <th>{{barang.nama_barang}}</th>
+            <th>{{barang.harga_barang}}</th>
+            <th>{{barang.deskripsi}}</th>
+        </tr>
+{% endfor %}
+
+</table>
+
+<h5>Sesi terakhir login: {{ last_login }}</h5>
+<button><a href="{% url 'wishlist:logout' %}">Logout</a></button>
+<script>
+    $(document).ready(function(){
+        $("button").click(function(){
+            $.get("initial_wishlist_data.json", function(data, status){
+                alert("Data: " + data + "\nStatus: " + status);
+            });
+        });
+    });
+</script>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Wishlist Maysha</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Logout</a></li>
+            <li><a href="#">Other</a></li>
+        </ul>
+    </div>
+</nav>
+{% endblock content %}
